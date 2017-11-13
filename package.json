@@ -1,0 +1,22 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": ">这个库主要是搭一个UMD模块开发的架子",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sailormillet/UMDDemo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sailormillet/UMDDemo/issues"
+  },
+  "homepage": "https://github.com/sailormillet/UMDDemo#readme",
+  "devDependencies": {
+    "webpack": "^3.8.1"
+  }
+}

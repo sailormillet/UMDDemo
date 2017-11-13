@@ -1,0 +1,11 @@
+*.lock
+nohup.out
+*.php~
+*.old
+.idea
+/node_modules
+.DS_Store
+*.TMP
+.buildpath
+.project
+.settings.idea
