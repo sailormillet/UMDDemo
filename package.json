@@ -4,7 +4,8 @@
   "description": ">这个库主要是搭一个UMD模块开发的架子",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "script":"start"
   },
   "repository": {
     "type": "git",

@@ -1,30 +1,30 @@
-#frontendEffects
+# frontendEffects
 >这个库主要是搭一个UMD模块开发的架子
 
 >主要用html5、css3、less、es6、jQuery、bootstrap、webpack压缩、juicer模版渲染
 
-##架构
-- ####类库框(mvc开发思想)
+## 架构
+- #### 类库框(mvc开发思想)
    jquery、CommonJs模块定义系统
 
-- ####dist  为生产环境目录，包含CSS、JavaScript、图片素材 和 用于演示的Html文件。
+- #### dist  为生产环境目录，包含CSS、JavaScript、图片素材 和 用于演示的Html文件。
      - html    
      - 压缩后的css
      - 压缩后的js 
      
 
-- ####src 存放 Less、JavaScrip文件源码 和 第三方库文件。
+- #### src 存放 Less、JavaScrip文件源码 和 第三方库文件。
      - common 
          - 第三方库文件
    
 
 ## 编码开发
 
-- ####编辑器 
+- #### 编辑器 
    - vscode
 
        
-- ####效率工具
+- #### 效率工具
 
    - webpack
       - webpack可以在终端中使用，在基本的使用方法如下：
@@ -46,13 +46,13 @@
 
       
       
-- ####模块定义
+- #### 模块定义
     - CommonJS : CommonJS规范是由NodeJS发扬光大，这标志着JavaScript模块化编程正式登上舞台
     
     - UMD: 通用模块规范,既然CommonJs和AMD风格一样流行，似乎缺少一个统一的规范。所以人们产生了这样的需求，希望有支持两种风格的“通用”模式，于是通用模块规范（UMD）诞生了。
     
     
-- ####版本管理
+- #### 版本管理
 
    - git github
 
