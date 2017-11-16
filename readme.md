@@ -66,3 +66,8 @@
 # Forexample
 # demo1 src/main 在src路径下
 ```../node_modules/.bin/webpack src/main/js/main.js dist/js/bundle.js```
+
+
+# 执行
+npm run server 热加载
+npm start 、webpack 压缩文件npm start ＝ webpack
