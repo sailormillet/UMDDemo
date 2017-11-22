@@ -8,21 +8,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const staticHtml = path.join(__dirname, '/dist/html/') ;//静态文件html的地址
 const staticFile = path.join(__dirname, '/dist/') ;//静态文件目录
-console.log(staticHtml)
-console.log(path.resolve(__dirname , "/dist/src/main/js/main.js") )
 // const hashFileName = hash?'[name]_' + hash:'[name]_[hash:8]';
 module.exports = {  
-    devtool: 'cheap-module-source-map',
     context: __dirname,
     //“__dirname”是node.js中的一个全局变量，它指向当前执行脚本所在的目录。
-    entry: __dirname + "/src/main/js/main.js",//已多次提及的唯一入口文件
-    // entry: {
-      // app:path.resolve(__dirname , "./src/main/js/main.js") ,
-      // vendor: 'moment'
-  // },
+    entry:  __dirname + "/src/main/js/main.js",//已多次提及的唯一入口文件
     output: {
-      path: path.resolve(__dirname , "./dist/js/"),//打包后的文件存放的地方
-      filename: "[name].[hash].js",//打包后输出文件的文件名
+      path: __dirname + "/dist/js/",//打包后的文件存放的地方
+      filename: "bundle.js",//打包后输出文件的文件名
     //   publicPath: "http://millet.example.com/js/"
     },
     devtool: 'inline-source-map',
@@ -46,10 +39,22 @@ module.exports = {
               },
               exclude: /node_modules/
           },
-          {
-            test: /\.juicer$/,
-            loader: 'juicer-loader',
-          },
+        //   {
+        //     test: /\.css$/,
+        //     use: [
+        //         {
+        //             loader: "style-loader"
+        //         }, {
+        //             loader: "css-loader",
+        //             options: {
+        //               modules: true
+        //           }
+        //         },{
+        //             loader: "postcss-loader"
+        //           }
+                
+        //     ]
+        // },
         {
             test: /\.(less|css)$/,
             use: ExtractTextPlugin.extract({
@@ -92,15 +97,9 @@ module.exports = {
       
     }),
     new ExtractTextPlugin({
-        filename:'../css/[name]/[name]_[hash:8].min.css',
+        filename:'../css/[name]_[hash:8].min.css',
         disable: false,
         allChunks: true,
       }),
-      new UglifyJSPlugin({
-        sourceMap
-      })
-    //   new webpack.optimize.CommonsChunkPlugin({
-    //     name: 'vendor' // 指定公共 bundle 的名字。
-    // })
 ],
   }
