@@ -4,6 +4,9 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
+const os = require('os');
+const UglifyJsParallelPlugin = require('webpack-uglify-parallel');//webpack-uglify-parallel的是实现原理是采用了多核并行压缩的方式来提升我们的压缩速度。
+
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const staticHtml = path.join(__dirname, '/dist/html/') ;//静态文件html的地址
@@ -22,7 +25,7 @@ module.exports = {
   // },
     output: {
       path: path.resolve(__dirname , "./dist/js/"),//打包后的文件存放的地方
-      filename: "[name].[hash].js",//打包后输出文件的文件名
+      filename: "[name]_[hash].js",//打包后输出文件的文件名
     //   publicPath: "http://millet.example.com/js/"
     },
     devtool: 'inline-source-map',
@@ -69,6 +72,23 @@ module.exports = {
               fallback: 'style-loader',
             }),
           },
+          {
+            
+            test:/\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            
+            use: [{
+            
+            loader:'url-loader',
+            
+            query:{
+            
+            limit:10000,//用的图片并且会按照文件大小, 或者转化为 base64, 或者单独作为文件,这里大于1kb的图片会作为文件
+            
+            name:'[path][name].[ext]'//在某个路径的文件夹下生成那个图片名字的文件
+            
+            }
+            
+            }]}
         
       ]
   },
@@ -96,9 +116,22 @@ module.exports = {
         disable: false,
         allChunks: true,
       }),
-      new UglifyJSPlugin({
-        sourceMap
-      })
+    //   new webpack.optimize.UglifyJsPlugin({
+    //     exclude:/\.min\.js$/,
+    //     mangle:true,
+    //     compress: { warnings: false },
+    //     output: { comments: false }
+    //  }),
+      new UglifyJsParallelPlugin({
+        workers: os.cpus().length,
+        mangle: true,
+        compressor: {
+          warnings: false,
+          drop_console: true,
+          drop_debugger: true
+         }
+      }),
+      
     //   new webpack.optimize.CommonsChunkPlugin({
     //     name: 'vendor' // 指定公共 bundle 的名字。
     // })
