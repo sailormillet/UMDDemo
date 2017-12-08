@@ -4,10 +4,13 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
+
 const os = require('os');
 const UglifyJsParallelPlugin = require('webpack-uglify-parallel');//webpack-uglify-parallel的是实现原理是采用了多核并行压缩的方式来提升我们的压缩速度。
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');//解析css、less, 并把css变成文件通过link标签引入
+const autoprefixer = require('autoprefixer');//自动补全css3前缀
+const CleanWebpackPlugin = require('clean-webpack-plugin'); //使用前需要安装clean-w webpack删除文件夹
 
 const staticHtml = path.join(__dirname, '/dist/html/') ;//静态文件html的地址
 const staticFile = path.join(__dirname, '/dist/') ;//静态文件目录
@@ -25,7 +28,7 @@ module.exports = {
   // },
     output: {
       path: path.resolve(__dirname , "./dist/js/"),//打包后的文件存放的地方
-      filename: "[name]_[hash].js",//打包后输出文件的文件名
+      filename: "[name]_[hash].min.js",//打包后输出文件的文件名
     //   publicPath: "http://millet.example.com/js/"
     },
     devtool: 'inline-source-map',
@@ -68,6 +71,17 @@ module.exports = {
                 {
                   loader:'less-loader',
                 },
+                {
+                  loader: 'postcss-loader',
+                  // 在这里进行配置，也可以在postcss.config.js中进行配置，详情参考https://github.com/postcss/postcss-loader
+                  options: {
+                      plugins: function() {
+                          return [
+                              require('autoprefixer')
+                          ];
+                      }
+                  }
+              }
               ],
               fallback: 'style-loader',
             }),
@@ -99,7 +113,7 @@ module.exports = {
       //   'process.env': {NODE_ENV: '"development"'}
       // }),
       //new webpack.HotModuleReplacementPlugin(),就可以只替换必要的模块（修改过的模块）在webpack 2中使用NoErrorsPlugin会有警告提示
-    new webpack.NoEmitOnErrorsPlugin(),// 读取HTML模板文件，并输出HTML文件，开发环境实际输出到内存中，
+    // new webpack.NoEmitOnErrorsPlugin(),// 读取HTML模板文件，并输出HTML文件，开发环境实际输出到内存中，
 
     new FriendlyErrorsPlugin(),//用于更友好地输出webpack的警告、错误等信息
     new HtmlWebpackPlugin({
@@ -131,9 +145,13 @@ module.exports = {
           drop_debugger: true
          }
       }),
-      
-    //   new webpack.optimize.CommonsChunkPlugin({
-    //     name: 'vendor' // 指定公共 bundle 的名字。
-    // })
+      new CleanWebpackPlugin(
+        ['js/*.js','css/main/*.min.css'],　 //匹配删除的文件
+        {
+            root: staticFile,  //静态文件
+            verbose:  true,  //开启在控制台输出信息
+            dry: false    //启用删除文件
+        }),
+
 ],
   }
