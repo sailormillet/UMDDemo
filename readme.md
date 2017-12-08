@@ -1,4 +1,4 @@
-# frontendEffects
+# UMDDEMO
 >这个库主要是搭一个UMD模块开发的架子
 
 >主要用html5、css3、less、es6、jQuery、bootstrap、webpack压缩、juicer模版渲染
@@ -21,7 +21,7 @@
 ## 编码开发
 
 - #### 编辑器 
-   - vscode
+   - vscode（Visual Studio Code）
 
        
 - #### 效率工具
@@ -68,6 +68,13 @@
 ```../node_modules/.bin/webpack src/main/js/main.js dist/js/bundle.js```
 
 
-# 执行
+# 执行在package.json下面的scripts设置快捷指令，用npm执行
 npm run server 热加载
 npm start 、webpack 压缩文件npm start ＝ webpack
+
+
+
+＃ 案例
+
+## 压缩方式
+ ../../node_modules/.bin/webpack --config webpack.conf.main.js
