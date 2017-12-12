@@ -106,7 +106,10 @@
               解析Es6的 babel-preset-es2015 包和解析JSX的 babel-preset-react
         - juicer-loader juicer模版渲染
       
-      
+     - ```webpac Debug 配置``` 
+
+          - devtool:'source-map' 不压缩文件可以找到报错信息
+
 - #### 模块定义
     - CommonJS : CommonJS规范是由NodeJS发扬光大，这标志着JavaScript模块化编程正式登上舞台
     
